@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { notitySuccess } from "../../../notifications/productNotify";
 
 function ProductList({ data, removeProduct }) {
   const [filters, setFillters] = useState({
