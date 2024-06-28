@@ -5,11 +5,14 @@ import "./index.scss";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProductProvider from "./contexts/ProductContect.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ProductProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ProductProvider>
   </React.StrictMode>
 );
