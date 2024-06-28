@@ -1,0 +1,262 @@
+{
+  "users": [
+    {
+      "email": "kun@gmail.com",
+      "password": "$2a$10$7PCzebWbuSDzDbLL09Qwi.rqLtn1BR1Uf4cdqZVBDFDBgh3p8Bx2S",
+      "id": 1
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Giày chạy bộ Nike Air Zoom Pegasus",
+      "description": "Giày chạy bộ với công nghệ Air Zoom giúp tăng cường độ nảy và sự thoải mái.",
+      "brand": "Nike",
+      "category": "Running",
+      "size": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42"
+      ],
+      "color": [
+        "Đen",
+        "Trắng"
+      ],
+      "price": 2500000,
+      "stock": 100,
+      "images": [
+        "https://i.pinimg.com/564x/12/fb/1b/12fb1b3a3d5e38eee8418f993502e6db.jpg"
+      ],
+      "created_at": "2023-01-01T12:00:00Z",
+      "updated_at": "2023-01-01T12:00:00Z",
+      "rating": 4.5,
+      "reviews": []
+    },
+    {
+      "id": "2",
+      "name": "Giày bóng đá Adidas Predator",
+      "description": "Giày bóng đá với thiết kế đinh tán giúp tăng cường độ bám sân.",
+      "brand": "Adidas",
+      "category": "Soccer",
+      "size": [
+        "39",
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "color": [
+        "Đỏ",
+        "Đen"
+      ],
+      "price": 3000000,
+      "stock": 80,
+      "images": [
+        "https://i.pinimg.com/564x/41/41/1b/41411b1a53757d542508861edf0786e6.jpg"
+      ],
+      "created_at": "2023-02-01T12:00:00Z",
+      "updated_at": "2023-02-01T12:00:00Z",
+      "rating": 4.7,
+      "reviews": []
+    },
+    {
+      "id": "3",
+      "name": "Giày thể thao Puma RS-X",
+      "description": "Giày thể thao với thiết kế hiện đại và đệm êm ái.",
+      "brand": "Puma",
+      "category": "Casual",
+      "size": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "color": [
+        "Xanh",
+        "Đen"
+      ],
+      "price": 2000000,
+      "stock": 150,
+      "images": [
+        "https://i.pinimg.com/564x/77/fc/03/77fc03676e27ca88187635d0e5ec675c.jpg"
+      ],
+      "created_at": "2023-03-01T12:00:00Z",
+      "updated_at": "2023-03-01T12:00:00Z",
+      "rating": 4.3,
+      "reviews": []
+    },
+    {
+      "id": "4",
+      "name": "Giày tập gym Reebok Nano",
+      "description": "Giày tập gym với thiết kế hỗ trợ tối đa cho các bài tập cường độ cao.",
+      "brand": "Reebok",
+      "category": "Training",
+      "size": [
+        "37",
+        "38",
+        "39",
+        "40",
+        "41"
+      ],
+      "color": [
+        "Trắng",
+        "Xanh"
+      ],
+      "price": 2200000,
+      "stock": 120,
+      "images": [
+        "https://i.pinimg.com/564x/1e/04/27/1e04275011541883510fcf3a20e42183.jpg"
+      ],
+      "created_at": "2023-04-01T12:00:00Z",
+      "updated_at": "2023-04-01T12:00:00Z",
+      "rating": 4.6,
+      "reviews": []
+    },
+    {
+      "id": "5",
+      "name": "Giày sneaker Vans Old Skool",
+      "description": "Giày sneaker cổ điển với thiết kế đơn giản và phong cách.",
+      "brand": "Vans",
+      "category": "Casual",
+      "size": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "color": [
+        "Đen",
+        "Trắng"
+      ],
+      "price": 1800000,
+      "stock": 200,
+      "images": [
+        "https://i.pinimg.com/564x/1b/a9/ba/1ba9ba208ffe0311aae5831762c815f1.jpg"
+      ],
+      "created_at": "2023-05-01T12:00:00Z",
+      "updated_at": "2023-05-01T12:00:00Z",
+      "rating": 4.4,
+      "reviews": []
+    },
+    {
+      "id": "6",
+      "name": "Giày sneaker Vans Old Skool",
+      "description": "Giày sneaker cổ điển với thiết kế đơn giản và phong cách.",
+      "brand": "Vans",
+      "category": "Casual",
+      "size": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "color": [
+        "Đen",
+        "Trắng"
+      ],
+      "price": 1800000,
+      "stock": 200,
+      "images": [
+        "https://i.pinimg.com/564x/09/83/d3/0983d3f44cdaedad4480bb4279b1e063.jpg"
+      ],
+      "created_at": "2023-05-01T12:00:00Z",
+      "updated_at": "2023-05-01T12:00:00Z",
+      "rating": 4.4,
+      "reviews": []
+    },
+    {
+      "id": "7",
+      "name": "Giày sneaker Vans Old Skool",
+      "description": "Giày sneaker cổ điển với thiết kế đơn giản và phong cách.",
+      "brand": "Vans",
+      "category": "Casual",
+      "size": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "color": [
+        "Đen",
+        "Trắng"
+      ],
+      "price": 1800000,
+      "stock": 200,
+      "images": [
+        "https://i.pinimg.com/564x/76/f0/b7/76f0b72aefad198dc71b85f74d49b3d2.jpg"
+      ],
+      "created_at": "2023-05-01T12:00:00Z",
+      "updated_at": "2023-05-01T12:00:00Z",
+      "rating": 4.4,
+      "reviews": []
+    },
+    {
+      "name": "Giày sneaker Vans Old Skool 01",
+      "price": 1800000,
+      "images": "https://i.pinimg.com/736x/6d/a6/fb/6da6fb12ea90806831d201c8d96df285.jpg",
+      "description": "Giày sneaker cổ điển với thiết kế đơn giản và phong cách.",
+      "category": "Casual",
+      "rating": 4.8,
+      "stock": 200,
+      "brand": "Vans",
+      "id": "8"
+    },
+    {
+      "name": "Porter Suarez",
+      "price": 2500000,
+      "images": "https://i.pinimg.com/736x/72/d9/f4/72d9f40d08fa48d16e29ee1abcb8c901.jpg",
+      "description": "Giày sneaker cổ điển với thiết kế đơn giản và phong cách.",
+      "category": "Running",
+      "rating": 4,
+      "stock": 70,
+      "brand": "Nike",
+      "id": "ViZL0kC"
+    },
+    {
+      "name": "Lunea Owen",
+      "price": 310000,
+      "images": "https://i.pinimg.com/564x/c3/cf/a5/c3cfa5ab4a3700da27d4ec3f12fc534c.jpg",
+      "description": "Laudantium mollitia",
+      "category": "Running",
+      "rating": 3,
+      "stock": 60,
+      "brand": "Vans",
+      "id": "oeCdSa9"
+    },
+    {
+      "name": "Hamilton Roman",
+      "price": 210000,
+      "images": "https://i.pinimg.com/564x/bc/f9/35/bcf935e8c1f8e1f0194ff98916f93128.jpg",
+      "description": "Quia et commodi mole",
+      "category": "Running",
+      "rating": 4.7,
+      "stock": 42,
+      "brand": "Puma",
+      "id": "bowdY2u"
+    },
+    {
+      "name": "Kermit Patel",
+      "price": 859,
+      "images": "",
+      "description": "Eu a molestias est ",
+      "category": "Casual",
+      "rating": 4.5,
+      "stock": 77,
+      "brand": "Puma",
+      "id": "TjtNowL"
+    }
+  ]
+}
