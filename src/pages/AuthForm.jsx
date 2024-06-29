@@ -6,6 +6,7 @@ import { z } from "zod";
 import instance from "../axious";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { notitySuccess } from "../notifications/productNotify";
 
 const schema = z.object({
   email: z.string().email(),
@@ -25,12 +26,12 @@ function AuthForm({ isRegister }) {
     try {
       if (isRegister) {
         await instance.post("/register", data);
-        alert("Dang ki thanh cong");
+        notitySuccess("Bạn đã đăng kí thành công");
         nav("/login");
       } else {
         const result = await instance.post("/login", data);
         localStorage.setItem("user", JSON.stringify(result.data));
-        alert("Dang nhap thanh cong");
+        notitySuccess("Bạn đã đăng nhập thành công");
         nav("/admin");
       }
     } catch (error) {
