@@ -15,6 +15,10 @@ import ProductList from "./pages/admin/products/ProductList";
 import ProductForm from "./pages/admin/products/ProductForm";
 import { ToastContainer } from "react-toastify";
 import { notityError, notitySuccess } from "./notifications/productNotify";
+import Pricing from "./pages/client/Pricing";
+import Contact from "./pages/client/Contact";
+import Blog from "./pages/client/Blog";
+import About from "./pages/client/About";
 
 function App() {
   // notify
@@ -84,6 +88,10 @@ function App() {
         <Route path="/" element={<ClientLayout />}>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/product" element={<Product data={products} />}></Route>
+          <Route path="/pricing" element={<Pricing />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/blog" element={<Blog />}></Route>
+          <Route path="/about" element={<About />}></Route>
           <Route path="/product-detail/:id" element={<ProductDetail />}></Route>
         </Route>
         <Route path="/admin" element={<PrivateRouter />}>

@@ -7,7 +7,7 @@ function ClientLayout() {
   return (
     <>
       <Header />
-      <div className="content bg-[#F2EDE6] ">
+      <div className="content bg-gray-200  ">
         <Outlet />
       </div>
       <Footer />

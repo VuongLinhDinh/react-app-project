@@ -28,48 +28,50 @@ function ProductList({ data, removeProduct }) {
 
   return (
     <>
-      <div className="filter-container m-4">
+      <div className="filter-container m-4 flex justify-between flex-wrap items-start">
         <i className=" fas fa-sort-amount-down mr-4 text-2xl text-gray-500"></i>
-        <input
-          type="text"
-          name="name"
-          placeholder="Filter by name"
-          value={filters.name}
-          onChange={handleFilterChange}
-          className="mr-2 px-4 py-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Max price"
-          value={filters.price}
-          onChange={handleFilterChange}
-          className="mr-2 px-4 py-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          name="stock"
-          placeholder="Max stock"
-          value={filters.stock}
-          onChange={handleFilterChange}
-          className="mr-2 px-4 py-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          name="rating"
-          placeholder="Min rating"
-          value={filters.rating}
-          onChange={handleFilterChange}
-          className="mr-2 px-4 py-2 border border-gray-300 rounded"
-        />
-        <input
-          type="text"
-          name="brand"
-          placeholder="Filter by brand"
-          value={filters.brand}
-          onChange={handleFilterChange}
-          className="px-4 py-2 border border-gray-300 rounded"
-        />
+        <div className="flex justify-between flex-wrap items-start gap-2 w-3/4 ">
+          <input
+            type="text"
+            name="name"
+            placeholder="Filter by name"
+            value={filters.name}
+            onChange={handleFilterChange}
+            className="mr-2 px-4 py-2 border border-gray-300 rounded"
+          />
+          <input
+            type="number"
+            name="price"
+            placeholder="Max price"
+            value={filters.price}
+            onChange={handleFilterChange}
+            className="mr-2 px-4 py-2 border border-gray-300 rounded"
+          />
+          <input
+            type="number"
+            name="stock"
+            placeholder="Max stock"
+            value={filters.stock}
+            onChange={handleFilterChange}
+            className="mr-2 px-4 py-2 border border-gray-300 rounded"
+          />
+          <input
+            type="number"
+            name="rating"
+            placeholder="Min rating"
+            value={filters.rating}
+            onChange={handleFilterChange}
+            className="mr-2 px-4 py-2 border border-gray-300 rounded"
+          />
+          <input
+            type="text"
+            name="brand"
+            placeholder="Filter by brand"
+            value={filters.brand}
+            onChange={handleFilterChange}
+            className="px-4 py-2 border border-gray-300 rounded"
+          />
+        </div>
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -106,7 +108,7 @@ function ProductList({ data, removeProduct }) {
           <tbody className="divide-y divide-gray-200">
             {data.map((product) => (
               <tr key={product.id}>
-                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-wrap">
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-wrap w-1/2">
                   {product.name}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-[20px] h-[30px] ">
@@ -123,7 +125,7 @@ function ProductList({ data, removeProduct }) {
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                   {product.price}
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-wrap">
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-wrap w-1/2">
                   {product.description}
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-wrap">

@@ -19,19 +19,19 @@ function Header() {
               <Link to={"/product"}>
                 <li className="hover:text-[#018294] cursor-pointe">Product</li>
               </Link>
-              <Link to={"/product"}>
+              <Link to={"/pricing"}>
                 <li className="hover:text-[#018294] cursor-pointe">Pricing</li>
               </Link>
-              <Link to={"/product"}>
+              <Link to={"/contact"}>
                 <li className="hover:text-[#018294] cursor-pointe">
                   {" "}
                   Contact us
                 </li>
               </Link>
-              <Link to={"/product"}>
+              <Link to={"/blog"}>
                 <li className="hover:text-[#018294] cursor-pointe"> Blog</li>
               </Link>
-              <Link to={"/product"}>
+              <Link to={"/about"}>
                 <li className="hover:text-[#018294] cursor-pointe">About us</li>
               </Link>
             </ul>
