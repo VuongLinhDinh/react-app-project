@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useNavigate, useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import instance from "../../../axious";
+import { ProductContext } from "../../../contexts/ProductContect";
+import {
+  notityError,
+  notitySuccess
+} from "../../../notifications/productNotify";
 
 const schema = z.object({
   name: z.string().min(3),
@@ -15,9 +20,11 @@ const schema = z.object({
   stock: z.number().min(0),
   brand: z.string().min(4)
 });
-function ProductForm({ handleProduct }) {
+function ProductForm() {
   const { id } = useParams();
   const nav = useNavigate();
+  const { dispath } = useContext(ProductContext);
+
   const {
     register,
     handleSubmit,
@@ -35,6 +42,34 @@ function ProductForm({ handleProduct }) {
       })();
     }, [id, reset]);
   }
+
+  const handleProduct = async (data) => {
+    console.log(data);
+    if (id) {
+      // login edit
+      try {
+        // Log thêm để kiểm tra trước khi gọi API
+
+        const res = await instance.patch(`/products/${id}`, data);
+        dispath({ type: "UPDATE_PRODUCT", payload: res.data });
+        notitySuccess("Bạn đã sửa sản phẩm thành công");
+      } catch (error) {
+        notityError("Sửa thất bại, vui lòng thử lại");
+        console.error("Error updating product:", error);
+      }
+    } else {
+      // logic add
+      try {
+        const res = await instance.post(`/products`, data);
+        dispath({ type: "ADD_PRODUCT", payload: res.data });
+        notitySuccess("Bạn đã thêm sản phẩm thành công");
+      } catch (error) {
+        notityError("Thêm thất bại, vui lòng thử lại");
+        console.error("Error adding product:", error);
+      }
+    }
+    nav("/admin/product-list");
+  };
 
   return (
     <>

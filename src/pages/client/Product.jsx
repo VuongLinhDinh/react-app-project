@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { ProductContext } from "../../contexts/ProductContect";
 
-function Product({ data }) {
+function Product() {
+  const { state, dispath } = useContext(ProductContext);
+  console.log(state);
   const [visibleProducts, setVisibleProducts] = useState(6);
   console.log(visibleProducts);
 
@@ -34,7 +37,7 @@ function Product({ data }) {
           </div>
         </div>
         <div className="product-list flex flex-wrap justify-between gap-2 mt-7 -mx-20">
-          {data.slice(0, visibleProducts).map((item) => (
+          {state.products.slice(0, visibleProducts).map((item) => (
             <div
               key={item.id}
               className="product-card px-4 py-2 mb-5 rounded-lg border-collapse hover:shadow-lg "
@@ -79,7 +82,7 @@ function Product({ data }) {
           ))}
         </div>
         <div className="w-full flex justify-center my-4">
-          {visibleProducts < data.length ? (
+          {visibleProducts < state.products.length ? (
             <button
               className="btn-more bg-[#018294] text-white px-5 py-2"
               onClick={handleLoadMore}

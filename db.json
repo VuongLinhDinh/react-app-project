@@ -215,37 +215,15 @@
       "id": "8"
     },
     {
-      "name": "Porter Suarez",
-      "price": 2500000,
-      "images": "https://i.pinimg.com/736x/72/d9/f4/72d9f40d08fa48d16e29ee1abcb8c901.jpg",
-      "description": "Giày sneaker cổ điển với thiết kế đơn giản và phong cách.",
-      "category": "Running",
-      "rating": 4,
-      "stock": 70,
-      "brand": "Nike",
-      "id": "ViZL0kC"
-    },
-    {
-      "name": "Lunea Owen",
-      "price": 310000,
+      "name": "Juliet Farrell",
+      "price": 143,
       "images": "https://i.pinimg.com/564x/c3/cf/a5/c3cfa5ab4a3700da27d4ec3f12fc534c.jpg",
-      "description": "Laudantium mollitia",
-      "category": "Running",
-      "rating": 3.1,
-      "stock": 60,
-      "brand": "Vans",
-      "id": "oeCdSa9"
-    },
-    {
-      "name": "Hamilton Roman",
-      "price": 210000,
-      "images": "https://i.pinimg.com/564x/bc/f9/35/bcf935e8c1f8e1f0194ff98916f93128.jpg",
-      "description": "Quia et commodi mole",
-      "category": "Running",
-      "rating": 4.7,
-      "stock": 42,
-      "brand": "Puma",
-      "id": "bowdY2u"
+      "description": "Magnam veritatis Nam",
+      "category": "puma",
+      "rating": 4,
+      "stock": 58,
+      "brand": "Aspernatur voluptati",
+      "id": "WWAvgxg"
     }
   ]
 }

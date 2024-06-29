@@ -1,79 +1,23 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.scss";
-import Header from "./components/Header";
-import ClientLayout from "./components/layouts/ClientLayout";
 import AdminLayout from "./components/layouts/AdminLayout";
+import ClientLayout from "./components/layouts/ClientLayout";
+import AuthForm from "./pages/AuthForm";
 import NotFound from "./pages/NotFound";
+import PrivateRouter from "./pages/PrivateRouter";
+import ProductForm from "./pages/admin/products/ProductForm";
+import ProductList from "./pages/admin/products/ProductList";
 import Home from "./pages/client/Home";
 import Product from "./pages/client/Product";
-import { useEffect, useState } from "react";
-import instance from "./axious";
 import ProductDetail from "./pages/client/ProductDetail";
-import AuthForm from "./pages/AuthForm";
-import PrivateRouter from "./pages/PrivateRouter";
-import ProductList from "./pages/admin/products/ProductList";
-import ProductForm from "./pages/admin/products/ProductForm";
-import { ToastContainer } from "react-toastify";
-import { notityError, notitySuccess } from "./notifications/productNotify";
-import Pricing from "./pages/client/Pricing";
-import Contact from "./pages/client/Contact";
-import Blog from "./pages/client/Blog";
+
 import About from "./pages/client/About";
+import Blog from "./pages/client/Blog";
+import Contact from "./pages/client/Contact";
+import Pricing from "./pages/client/Pricing";
 
 function App() {
-  // notify
-
-  const nav = useNavigate();
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const { data } = await instance.get("/products");
-      setProducts(data);
-    })();
-  }, []);
-
-  const handleRemove = async (id) => {
-    try {
-      if (confirm("Bạn chắc chắn muốn xóa chứ !!!")) {
-        await instance.delete(`/products/${id}`);
-        const newData = await instance.get("/products");
-        setProducts(newData.data);
-        notitySuccess("Bạn đã xóa sản phẩm thành công");
-      }
-    } catch (error) {
-      console.error("Error remove product", error);
-      notityError("Xóa thất bại, vui lòng thử lại");
-    }
-  };
-  const handleProduct = async (data) => {
-    console.log(data);
-    if (data.id) {
-      // login edit
-      try {
-        // Log thêm để kiểm tra trước khi gọi API
-
-        await instance.put(`/products/${data.id}`, data);
-        const newData = await instance.get(`/products`);
-        setProducts(newData.data);
-        notitySuccess("Bạn đã sửa sản phẩm thành công");
-      } catch (error) {
-        notityError("Sửa thất bại, vui lòng thử lại");
-        console.error("Error updating product:", error);
-      }
-    } else {
-      // logic add
-      try {
-        const res = await instance.post(`/products`, data);
-        console.log(res.data);
-        setProducts([...products, res.data]);
-        notitySuccess("Bạn đã thêm sản phẩm thành công");
-      } catch (error) {
-        notityError("Thêm thất bại, vui lòng thử lại");
-        console.error("Error adding product:", error);
-      }
-    }
-    nav("/admin/product-list");
-  };
   return (
     <>
       <div className="notis z-10">
@@ -87,7 +31,7 @@ function App() {
         <Route path="" element={<Navigate to={"/home"} />}></Route>
         <Route path="/" element={<ClientLayout />}>
           <Route path="/home" element={<Home />}></Route>
-          <Route path="/product" element={<Product data={products} />}></Route>
+          <Route path="/product" element={<Product />}></Route>
           <Route path="/pricing" element={<Pricing />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/blog" element={<Blog />}></Route>
@@ -96,19 +40,11 @@ function App() {
         </Route>
         <Route path="/admin" element={<PrivateRouter />}>
           <Route path="" element={<AdminLayout />}>
-            <Route
-              path="/admin/product-list"
-              element={
-                <ProductList data={products} removeProduct={handleRemove} />
-              }
-            ></Route>
-            <Route
-              path="/admin/product-add"
-              element={<ProductForm handleProduct={handleProduct} />}
-            ></Route>
+            <Route path="/admin/product-list" element={<ProductList />}></Route>
+            <Route path="/admin/product-add" element={<ProductForm />}></Route>
             <Route
               path="/admin/product-edit/:id"
-              element={<ProductForm handleProduct={handleProduct} />}
+              element={<ProductForm />}
             ></Route>
           </Route>
         </Route>
