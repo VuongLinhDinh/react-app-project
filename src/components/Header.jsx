@@ -38,7 +38,7 @@ function Header() {
           </nav>
         </div>
         <div className="box-end flex flex-wrap justify-between gap-4 items-center">
-          <Link to="">
+          <Link to="/login">
             <button className="font-medium">Login</button>
           </Link>
           <Link to="">

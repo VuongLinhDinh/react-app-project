@@ -8,13 +8,13 @@ import {
 } from "../../../notifications/productNotify";
 
 function ProductList() {
-  const { state, dispatch } = useContext(ProductContext);
+  const { state, dispath } = useContext(ProductContext);
 
   const handleRemove = async (id) => {
     try {
       if (confirm("Bạn chắc chắn muốn xóa chứ !!!")) {
         await instance.delete(`/products/${id}`);
-        dispatch({ type: "DELETE_PRODUCT", payload: id });
+        dispath({ type: "DELETE_PRODUCT", payload: id });
         notitySuccess("Bạn đã xóa sản phẩm thành công");
       }
     } catch (error) {
@@ -56,7 +56,7 @@ function ProductList() {
           <tbody className="divide-y divide-gray-200">
             {state.products.map((product) => (
               <tr key={product.id}>
-                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 flex items-center w-1/4">
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 flex items-center">
                   <div className="w-16 h-20 mr-4 flex-shrink-0">
                     {product.images ? (
                       <img

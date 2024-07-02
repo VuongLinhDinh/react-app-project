@@ -11,7 +11,6 @@ import ProductList from "./pages/admin/products/ProductList";
 import Home from "./pages/client/Home";
 import Product from "./pages/client/Product";
 import ProductDetail from "./pages/client/ProductDetail";
-
 import About from "./pages/client/About";
 import Blog from "./pages/client/Blog";
 import Contact from "./pages/client/Contact";

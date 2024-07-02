@@ -1,12 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContect";
 
 function Product() {
   const { state, dispath } = useContext(ProductContext);
-  console.log(state);
   const [visibleProducts, setVisibleProducts] = useState(6);
-  console.log(visibleProducts);
+  const [sortOption, setSortOption] = useState(
+    localStorage.getItem("sortOption") || "relevancy"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("sortOption", sortOption);
+  }, [sortOption]);
 
   const handleLoadMore = () => {
     setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 6);
@@ -15,6 +20,19 @@ function Product() {
   const handleHide = () => {
     setVisibleProducts(6);
   };
+
+  const handleSortChange = (e) => {
+    setSortOption(e.target.value);
+  };
+
+  const sortedProducts = [...state.products].sort((a, b) => {
+    if (sortOption === "price") {
+      return a.price - b.price;
+    } else if (sortOption === "rating") {
+      return b.rating - a.rating;
+    }
+    return 0;
+  });
 
   return (
     <>
@@ -29,7 +47,12 @@ function Product() {
           </div>
           <div className="sort-by flex gap-4 items-center">
             <span className="text-gray-500">Sort By:</span>
-            <select name="sort" id="sort">
+            <select
+              name="sort"
+              id="sort"
+              value={sortOption}
+              onChange={handleSortChange}
+            >
               <option value="relevancy">Relevancy</option>
               <option value="price">Price</option>
               <option value="rating">Rating</option>
@@ -37,7 +60,7 @@ function Product() {
           </div>
         </div>
         <div className="product-list flex flex-wrap justify-between gap-2 mt-7 -mx-20">
-          {state.products.slice(0, visibleProducts).map((item) => (
+          {sortedProducts.slice(0, visibleProducts).map((item) => (
             <div
               key={item.id}
               className="product-card px-4 py-2 mb-5 rounded-lg border-collapse hover:shadow-lg "
