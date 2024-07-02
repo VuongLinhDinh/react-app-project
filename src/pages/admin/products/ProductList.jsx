@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../../../contexts/ProductContect";
 import instance from "../../../axious";
@@ -9,6 +9,10 @@ import {
 
 function ProductList() {
   const { state, dispath } = useContext(ProductContext);
+  const [hiddenProducts, setHiddenProducts] = useState(() => {
+    const saved = localStorage.getItem("hiddenProducts");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const handleRemove = async (id) => {
     try {
@@ -23,12 +27,31 @@ function ProductList() {
     }
   };
 
+  const handleCheckboxChange = (id) => {
+    let updatedHiddenProducts = [...hiddenProducts];
+    if (updatedHiddenProducts.includes(id)) {
+      updatedHiddenProducts = updatedHiddenProducts.filter(
+        (productId) => productId !== id
+      );
+    } else {
+      updatedHiddenProducts.push(id);
+    }
+    setHiddenProducts(updatedHiddenProducts);
+    localStorage.setItem(
+      "hiddenProducts",
+      JSON.stringify(updatedHiddenProducts)
+    );
+  };
+
   return (
     <>
       <div className="overflow-x-auto w-full">
         <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
           <thead className="ltr:text-left rtl:text-right">
             <tr>
+              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-1/4">
+                <input type="checkbox" name="" id="" />
+              </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-1/4">
                 Product
               </th>
@@ -56,6 +79,13 @@ function ProductList() {
           <tbody className="divide-y divide-gray-200">
             {state.products.map((product) => (
               <tr key={product.id}>
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700 w-1/12">
+                  <input
+                    type="checkbox"
+                    checked={hiddenProducts.includes(product.id)}
+                    onChange={() => handleCheckboxChange(product.id)}
+                  />
+                </td>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 flex items-center">
                   <div className="w-16 h-20 mr-4 flex-shrink-0">
                     {product.images ? (

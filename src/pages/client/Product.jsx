@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContect";
 
 function Product() {
-  const { state, dispath } = useContext(ProductContext);
+  const { state } = useContext(ProductContext);
   const [visibleProducts, setVisibleProducts] = useState(6);
   const [sortOption, setSortOption] = useState(
     localStorage.getItem("sortOption") || "relevancy"
   );
+  const [hiddenProducts, setHiddenProducts] = useState(() => {
+    const saved = localStorage.getItem("hiddenProducts");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem("sortOption", sortOption);
@@ -25,14 +29,16 @@ function Product() {
     setSortOption(e.target.value);
   };
 
-  const sortedProducts = [...state.products].sort((a, b) => {
-    if (sortOption === "price") {
-      return a.price - b.price;
-    } else if (sortOption === "rating") {
-      return b.rating - a.rating;
-    }
-    return 0;
-  });
+  const sortedProducts = [...state.products]
+    .filter((product) => !hiddenProducts.includes(product.id))
+    .sort((a, b) => {
+      if (sortOption === "price") {
+        return a.price - b.price;
+      } else if (sortOption === "rating") {
+        return b.rating - a.rating;
+      }
+      return 0;
+    });
 
   return (
     <>
@@ -63,7 +69,7 @@ function Product() {
           {sortedProducts.slice(0, visibleProducts).map((item) => (
             <div
               key={item.id}
-              className="product-card px-4 py-2 mb-5 rounded-lg border-collapse hover:shadow-lg "
+              className="product-card px-4 py-2 mb-5 rounded-lg border-collapse hover:shadow-lg"
             >
               <div className="image-card w-[400px] h-[500px] relative group">
                 <Link to={`/product-detail/${item.id}`}>
@@ -105,7 +111,7 @@ function Product() {
           ))}
         </div>
         <div className="w-full flex justify-center my-4">
-          {visibleProducts < state.products.length ? (
+          {visibleProducts < sortedProducts.length ? (
             <button
               className="btn-more bg-[#018294] text-white px-5 py-2"
               onClick={handleLoadMore}

@@ -6,7 +6,7 @@ function Header() {
       <section className="navbar flex flex-wrap justify-between items-center mx-auto w-11/12 md:w-3/4 px-5 pb-5">
         <div className="box-start flex flex-wrap justify-between items-center gap-4">
           <div className="logo">
-            <Link to="index.html">
+            <Link to="/home">
               <img
                 src="https://i.pinimg.com/564x/37/4b/bf/374bbfa2ba213dc74edec502949305a8.jpg"
                 className="w-[80px]"
