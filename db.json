@@ -228,13 +228,36 @@
     {
       "name": "Inga Gilbert",
       "price": 2100000,
-      "images": "",
+      "images": "https://i.pinimg.com/564x/60/ab/a0/60aba0aa978767630b3486bd7a3dfeb6.jpg",
       "description": "Dolore iure aliquip ",
       "category": "Running",
       "rating": 3.4,
       "stock": 96,
       "brand": "Vans",
-      "id": "spUJtic"
+      "id": "spUJtic",
+      "size": [
+        39,
+        40,
+        41,
+        42
+      ]
+    },
+    {
+      "name": "Adidas R-FCT 01",
+      "price": 1000000,
+      "images": "",
+      "description": "Velit non tempore c",
+      "category": "Running",
+      "rating": 4.9,
+      "stock": 20,
+      "brand": "Adidas",
+      "size": [
+        40,
+        41,
+        39,
+        42
+      ],
+      "id": "LQk_-vm"
     }
   ]
 }

@@ -10,7 +10,7 @@ function Footer() {
             <div className="mb-6 md:mb-0">
               <Link to="https://flowbite.com/" className="flex items-center">
                 <img
-                  src="https://i.pinimg.com/564x/37/4b/bf/374bbfa2ba213dc74edec502949305a8.jpg"
+                  src="/Sneaker.png"
                   className=" me-3 w-20"
                   alt="Sneaker-Shop"
                 />

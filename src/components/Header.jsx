@@ -7,11 +7,7 @@ function Header() {
         <div className="box-start flex flex-wrap justify-between items-center gap-4">
           <div className="logo">
             <Link to="/home">
-              <img
-                src="https://i.pinimg.com/564x/37/4b/bf/374bbfa2ba213dc74edec502949305a8.jpg"
-                className="w-[80px]"
-                alt="my-logo"
-              />
+              <img src="/Sneaker.png" className="w-[80px]" alt="my-logo" />
             </Link>
           </div>
           <nav className="menu">

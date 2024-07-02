@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,67 +18,79 @@ const schema = z.object({
   category: z.string().optional(),
   rating: z.number().min(0).max(5),
   stock: z.number().min(0),
-  brand: z.string().min(4)
+  brand: z.string().min(4),
+  size: z.array(z.number()).nonempty("At least one size must be selected")
 });
+
 function ProductForm() {
   const { id } = useParams();
   const nav = useNavigate();
   const { dispath } = useContext(ProductContext);
+  const [selectedSizes, setSelectedSizes] = useState([]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setValue
   } = useForm({
     resolver: zodResolver(schema)
   });
-  console.log("ProductForm id:", id);
-  if (id) {
-    useEffect(() => {
+
+  useEffect(() => {
+    if (id) {
       (async () => {
         const { data } = await instance.get(`/products/${id}`);
         reset(data);
+        setSelectedSizes(data.size || []); // Initialize selected sizes if editing existing product
       })();
-    }, [id, reset]);
-  }
+    }
+  }, [id, reset]);
+
+  useEffect(() => {
+    setValue("size", selectedSizes); // Update form value for `size`
+  }, [selectedSizes, setValue]);
+
+  const handleCheckboxChange = (size) => {
+    if (selectedSizes.includes(size)) {
+      setSelectedSizes(selectedSizes.filter((s) => s !== size));
+    } else {
+      setSelectedSizes([...selectedSizes, size]);
+    }
+  };
 
   const handleProduct = async (data) => {
-    console.log(data);
+    data.size = selectedSizes; // Assign selected sizes to the data object
     if (id) {
-      // login edit
       try {
-        // Log thêm để kiểm tra trước khi gọi API
-
         const res = await instance.patch(`/products/${id}`, data);
         dispath({ type: "UPDATE_PRODUCT", payload: res.data });
         notitySuccess("Bạn đã sửa sản phẩm thành công");
       } catch (error) {
         notityError("Sửa thất bại, vui lòng thử lại");
-        console.error("Error updating product:", error);
       }
     } else {
-      // logic add
       try {
         const res = await instance.post(`/products`, data);
         dispath({ type: "ADD_PRODUCT", payload: res.data });
         notitySuccess("Bạn đã thêm sản phẩm thành công");
       } catch (error) {
         notityError("Thêm thất bại, vui lòng thử lại");
-        console.error("Error adding product:", error);
       }
     }
     nav("/admin/product-list");
   };
 
+  const sizes = [39, 40, 41, 42, 43];
+
   return (
     <>
       <h1 className="text-2xl font-semibold mt-2 px-2">
-        {" "}
         {id ? "Edit" : "Add"} product
       </h1>
       <form
-        className=" w-full flex justify-between items-start flex-wrap gap-3 bg-gray-100 px-5 py-5 mt-10"
+        className="w-full flex justify-between items-start flex-wrap gap-3 bg-gray-100 px-5 py-5 mt-10"
         onSubmit={handleSubmit((data) => handleProduct({ ...data, id }))}
       >
         <div className="mb-3 w-1/2 px-4 -mx-3">
@@ -115,7 +127,7 @@ function ProductForm() {
         </div>
         <div className="mb-3 w-1/2 px-4 -mx-3">
           <label
-            htmlFor="title"
+            htmlFor="images"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Your images
@@ -130,9 +142,47 @@ function ProductForm() {
             <p className="text-red-500">{errors.images.message}</p>
           )}
         </div>
+        <div className="mb-3 w-full px-4 -mx-3">
+          <div>
+            <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
+              Select Sizes
+            </h3>
+            <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              {sizes.map((size) => (
+                <li
+                  key={size}
+                  className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                >
+                  <div className="flex items-center ps-3">
+                    <input
+                      type="checkbox"
+                      id={`size-${size}`}
+                      value={size}
+                      checked={selectedSizes.includes(size)}
+                      onChange={() => {
+                        handleCheckboxChange(size);
+                        console.log(size);
+                      }}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      htmlFor={`size-${size}`}
+                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >
+                      {size}
+                    </label>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {errors.size && (
+              <p className="text-red-500">{errors.size.message}</p>
+            )}
+          </div>
+        </div>
         <div className="mb-3 w-full px-2.5">
           <label
-            htmlFor="title"
+            htmlFor="description"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Your description
@@ -155,15 +205,13 @@ function ProductForm() {
             Your category
           </label>
           <select
-            name=""
-            id=""
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ps-3 pe-10"
             {...register("category")}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ps-3 pe-10"
           >
-            <option value="">-- select category</option>
+            <option value="">-- select category --</option>
             <option value="Running">Running</option>
             <option value="Casual">Casual</option>
-            <option value="puma">Puma</option>
+            <option value="Puma">Puma</option>
           </select>
         </div>
         <div className="mb-3 w-1/2 px-4 -mx-3">
@@ -203,20 +251,22 @@ function ProductForm() {
             <p className="text-red-500">{errors.stock.message}</p>
           )}
         </div>
-
         <div className="mb-3 w-1/2 px-4 -mx-3">
           <label
-            htmlFor="brand "
+            htmlFor="brand"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Your brand
           </label>
           <input
             {...register("brand")}
-            type="brand "
+            type="text"
             id="brand"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+          {errors.brand && (
+            <p className="text-red-500">{errors.brand.message}</p>
+          )}
         </div>
         <div className="flex items-start mb-5 w-full">
           <div className="flex items-center h-5">
